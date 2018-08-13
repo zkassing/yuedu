@@ -29,7 +29,7 @@ class ArticleModel {
   }
 
   static article_select_by_id (values) {
-    const _sql = `SELECT id, title, author, podcast, content, labels, (SELECT count(*) FROM t_like WHERE t_like.article_id = t_articles.id) as like_count, (SELECT count(id) FROM t_collections WHERE t_collections.article_id = t_articles.id) as collection_count FROM t_article WHERE id = ?`
+    const _sql = `SELECT id, title, author, podcast, content, labels, (SELECT count(id) FROM t_like WHERE t_like.article_id = t_articles.id) as like_count, (SELECT count(id) FROM t_collections WHERE t_collections.article_id = t_articles.id) as collection_count FROM t_article WHERE id = ?`
     return query(_sql, values)
   }
 

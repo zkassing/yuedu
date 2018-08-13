@@ -10,7 +10,6 @@ const response_formatter = require('./middleware/response_formatter')
 const jwt_config = require('./config/jwt_config')
 
 const index = require('./routes/index')
-// const users = require('./routes/users')
 
 // error handler
 onerror(app)
@@ -33,7 +32,7 @@ app.use(response_formatter)
 app.use(jwt({
   secret: jwt_config.secret
 }).unless({
-  path: [/^\/api\/user\/./]
+  path: [/^\/api\/./]
 }))
 // routes
 app.use(index.routes(), index.allowedMethods())
