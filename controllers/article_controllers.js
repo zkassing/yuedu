@@ -11,8 +11,9 @@ const get_articles_limit = async (ctx) => {
 }
 
 const get_articles_top10 = async (ctx) => {
+  const {type_id} = ctx.params
   try {
-    const articles = await article_model.articles_select_top10()
+    const articles = await article_model.articles_select_top10(type_id)
     ctx.body = articles
   } catch (error) {
     ctx.throw(400, error)
