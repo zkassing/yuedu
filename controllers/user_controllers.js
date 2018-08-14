@@ -18,15 +18,14 @@ const login = async (ctx) => {
           token
         }
       } else {
-        ctx.throw('用户名或密码错误', 400)
+        ctx.throw(400, '用户名或密码错误')
       }
     } else {
-      ctx.throw('用户名不存在', 400)
+      ctx.throw(400, '用户名不存在')
     }
   } catch (error) {
-    ctx.throw(error, 400)
+    ctx.throw(400, error)
   }
-  
 }
 
 const register = async (ctx) => {
@@ -34,7 +33,18 @@ const register = async (ctx) => {
   const res = await user_model.user_insert(user)
 }
 
+const get_user = async (ctx) => {
+  const {id} = ctx.params
+  try {
+    const user = await user_model.user_select_by_id(id)
+    
+  } catch (error) {
+    
+  }
+}
+
 module.exports = {
   login,
-  register
+  register,
+  get_user
 }

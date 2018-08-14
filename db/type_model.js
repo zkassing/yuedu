@@ -23,3 +23,5 @@ class TypeModel {
     return query(_sql, values)
   }
 }
+
+module.exports = TypeModel

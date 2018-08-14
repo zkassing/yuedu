@@ -1,6 +1,6 @@
 const query = require('./index')
 
-class User {
+class UserModel {
   constructor () {
 
   }
@@ -11,7 +11,7 @@ class User {
   }
 
   static user_select_by_id (values) {
-    const _sql = `SELECT ?? FROM t_users WHERE id = ?`
+    const _sql = `SELECT id, nikiname, avatar, (SELECT count(id) FROM t_follow WHERE user_id = t_users.id) as follow_count, (SELECT count(id) FROM t_fans WHERE user_id = t_users.id) as fans_count, DATE_FORMAT(created_time, '%Y年%m月%d日') as created_time FROM t_users WHERE id = ?`
     return query(_sql, values)
   }
 
@@ -25,12 +25,12 @@ class User {
     return query(_sql, values)
   }
 
-
   static user_update_by_id (values) {
     const _sql = `UPDATE t_users SET ? WHERE id = ?`
     return query(_sql, values)
   }
+
 }
 
 
-module.exports = User
+module.exports = UserModel
